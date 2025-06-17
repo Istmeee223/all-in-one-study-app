@@ -4,14 +4,8 @@ import { z } from "zod";
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
-  email: text("email"),
-  preferences: jsonb("preferences").default({}),
-  xp: integer("xp").default(0),
-  level: integer("level").default(1),
-  streak: integer("streak").default(0),
-  lastActiveAt: timestamp("last_active_at").defaultNow(),
+  email: text("email").notNull().unique(),
+  passwordHash: text("password_hash").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -309,5 +303,9 @@ export type InsertAchievement = z.infer<typeof insertAchievementSchema>;
 export type Analytics = typeof analytics.$inferSelect;
 export type InsertAnalytics = z.infer<typeof insertAnalyticsSchema>;
 
-export type User = typeof users.$inferSelect;
-export type InsertUser = z.infer<typeof insertUserSchema>;
+export type User = {
+  id: string;
+  email: string;
+  passwordHash: string;
+  createdAt: Date;
+};

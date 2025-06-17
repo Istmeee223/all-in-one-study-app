@@ -21,6 +21,8 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { aiService } from "./ai-services";
+import { createUser, validateUser } from "./db";
+import { registerUser, loginUser, authMiddleware } from "./auth";
 
 // Configure multer for file uploads
 const uploadDir = path.join(process.cwd(), 'uploads');
@@ -58,6 +60,32 @@ const upload = multer({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Auth API
+  app.post("/api/auth/register", async (req, res) => {
+    const { email, username, password } = req.body;
+    try {
+      const user = await registerUser(email, username, password);
+      res.status(201).json({ message: "Registered", user });
+    } catch (e: any) {
+      res.status(400).json({ message: e.message });
+    }
+  });
+
+  app.post("/api/auth/login", async (req, res) => {
+    const { email, password } = req.body;
+    try {
+      const { user, token } = await loginUser(email, password);
+      res.json({ user, token });
+    } catch (e: any) {
+      res.status(400).json({ message: e.message });
+    }
+  });
+
+  // Example protected route
+  app.get("/api/auth/me", authMiddleware, async (req, res) => {
+    res.json({ userId: req.user.userId });
+  });
+
   // Notes API
   app.get("/api/notes", async (req: Request, res: Response) => {
     try {

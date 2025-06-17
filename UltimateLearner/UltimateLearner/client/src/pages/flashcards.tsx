@@ -491,27 +491,5 @@ function FlashcardDeckCard({
 }
 
 export default function Flashcards() {
-  return (
-    <>
-      <HeaderBar />
-      <main className="flex-1 overflow-y-auto p-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h3 className="text-2xl font-bold text-foreground">Flashcards</h3>
-              <p className="text-muted-foreground">Review and memorize key concepts</p>
-            </div>
-            <CreateDeckDialog>
-              <Button className="bg-green-600 hover:bg-green-700">
-                <Plus className="w-5 h-5 mr-2" />
-                New Deck
-              </Button>
-            </CreateDeckDialog>
-          </div>
-
-          <FlashcardDecks />
-        </div>
-      </main>
-    </>
-  );
+  return <div>Flashcards</div>;
 }

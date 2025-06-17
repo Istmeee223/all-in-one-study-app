@@ -424,22 +424,5 @@ function FilesList() {
 }
 
 export default function Files() {
-  return (
-    <>
-      <HeaderBar />
-      <main className="flex-1 overflow-y-auto p-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h3 className="text-2xl font-bold text-foreground">Study Materials</h3>
-              <p className="text-muted-foreground">Upload and organize your documents and resources</p>
-            </div>
-          </div>
-
-          <FileUploadZone />
-          <FilesList />
-        </div>
-      </main>
-    </>
-  );
+  return <div>Files</div>;
 }

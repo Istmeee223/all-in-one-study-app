@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import { formatDuration, POMODORO_DURATIONS } from "@/lib/constants";
 import type { InsertStudySession } from "@shared/schema";
+import useSound from "use-sound";
+import dingSfx from "@/assets/ding.mp3"; // Add a sound file
 
 function HeaderBar() {
   return (
@@ -247,6 +249,13 @@ function TimerDisplay() {
               </div>
             </Button>
           </div>
+
+          {/* Add this to your Timer UI */}
+          <div className="flex gap-2 mb-4">
+            <Button onClick={() => handlePresetSelect(25)}>25 min</Button>
+            <Button onClick={() => handlePresetSelect(50)}>50 min</Button>
+            <Button onClick={() => handlePresetSelect(5)}>5 min break</Button>
+          </div>
         </div>
       </CardContent>
     </Card>
@@ -305,6 +314,13 @@ function TimerStats() {
 }
 
 export default function Timer() {
+  const [play] = useSound(dingSfx);
+
+  const handleSessionComplete = () => {
+    play();
+    // ...existing logic
+  };
+
   return (
     <>
       <HeaderBar />

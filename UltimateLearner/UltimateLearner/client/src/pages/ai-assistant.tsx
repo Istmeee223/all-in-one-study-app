@@ -1,3 +1,13 @@
+import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  username: text("username").notNull(),
+  passwordHash: text("password_hash").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

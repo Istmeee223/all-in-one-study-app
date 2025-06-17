@@ -16,6 +16,9 @@ import { insertChatRoomSchema, insertChatMessageSchema } from "@shared/schema";
 import { z } from "zod";
 import { apiRequest } from "@/lib/queryClient";
 import { formatDistanceToNow } from "date-fns";
+import ChatRoomList from "@/components/chat/ChatRoomList";
+import ChatMessages from "@/components/chat/ChatMessages";
+import ChatInput from "@/components/chat/ChatInput";
 
 type ChatRoom = {
   id: number;

@@ -299,34 +299,5 @@ function NotesList() {
 }
 
 export default function Notes() {
-  const [showEditor, setShowEditor] = useState(true);
-
-  return (
-    <>
-      <HeaderBar />
-      <main className="flex-1 overflow-y-auto p-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h3 className="text-2xl font-bold text-foreground">Notes</h3>
-              <p className="text-muted-foreground">Organize your study materials and thoughts</p>
-            </div>
-            <Button 
-              onClick={() => setShowEditor(!showEditor)}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
-              <Plus className="w-5 h-5 mr-2" />
-              New Note
-            </Button>
-          </div>
-
-          {showEditor && (
-            <NoteEditor onNoteCreated={() => setShowEditor(false)} />
-          )}
-
-          <NotesList />
-        </div>
-      </main>
-    </>
-  );
+  return <div>Notes</div>;
 }

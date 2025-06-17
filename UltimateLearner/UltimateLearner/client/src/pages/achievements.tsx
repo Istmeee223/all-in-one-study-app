@@ -9,9 +9,12 @@ import { Trophy, Target, Calendar, Brain, BookOpen, Clock, Zap, Star, Award, Med
 export default function Achievements() {
   const [filter, setFilter] = useState<"all" | "earned" | "locked">("all");
 
-  const { data: achievements, isLoading } = useQuery({
+  const { data: achievements, isLoading, error } = useQuery({
     queryKey: ["/api/achievements", "current-user"],
   });
+
+  // Use real data if available, otherwise fallback to mock
+  const achievementList = achievements ?? mockAchievements;
 
   // Mock achievements data
   const mockAchievements = [
@@ -179,17 +182,20 @@ export default function Achievements() {
     return colors[category as keyof typeof colors] || colors.getting_started;
   };
 
-  const filteredAchievements = mockAchievements.filter(achievement => {
+  const filteredAchievements = achievementList.filter(achievement => {
     if (filter === "earned") return achievement.earned;
     if (filter === "locked") return !achievement.earned;
     return true;
   });
 
   const stats = {
-    total: mockAchievements.length,
-    earned: mockAchievements.filter(a => a.earned).length,
-    points: mockAchievements.filter(a => a.earned).reduce((sum, a) => sum + a.points, 0)
+    total: achievementList.length,
+    earned: achievementList.filter(a => a.earned).length,
+    points: achievementList.filter(a => a.earned).reduce((sum, a) => sum + a.points, 0)
   };
+
+  if (isLoading) return <div>Loading achievements...</div>;
+  if (error) return <div>Could not load achievements.</div>;
 
   return (
     <div className="container mx-auto p-6 space-y-6">

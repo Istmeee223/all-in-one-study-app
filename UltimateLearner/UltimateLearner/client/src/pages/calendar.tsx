@@ -455,32 +455,5 @@ function UpcomingDeadlines() {
 }
 
 export default function Calendar() {
-  return (
-    <>
-      <HeaderBar />
-      <main className="flex-1 overflow-y-auto p-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h3 className="text-2xl font-bold text-foreground">Study Calendar</h3>
-              <p className="text-muted-foreground">Schedule and track your study sessions</p>
-            </div>
-            <CreateEventDialog>
-              <Button className="bg-amber-600 hover:bg-amber-700">
-                <Plus className="w-5 h-5 mr-2" />
-                Add Event
-              </Button>
-            </CreateEventDialog>
-          </div>
-
-          <CalendarWidget />
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <TodaySchedule />
-            <UpcomingDeadlines />
-          </div>
-        </div>
-      </main>
-    </>
-  );
+  return <div>Calendar</div>;
 }

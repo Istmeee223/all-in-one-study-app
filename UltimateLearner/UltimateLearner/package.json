@@ -4,9 +4,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "start": "node server/index.js"
+    "dev": "concurrently \"npm run --prefix server dev\" \"npm run --prefix client dev\""
   },
   "dependencies": {
     "@capacitor/android": "^7.3.0",
@@ -44,6 +42,7 @@
     "@radix-ui/react-tooltip": "^1.2.0",
     "@tanstack/react-query": "^5.60.5",
     "@types/multer": "^1.4.13",
+    "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -96,6 +95,7 @@
     "@types/ws": "^8.5.13",
     "@vitejs/plugin-react": "^4.3.2",
     "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
     "drizzle-kit": "^0.30.4",
     "esbuild": "^0.25.0",
     "postcss": "^8.4.47",
@@ -106,5 +106,9 @@
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"
-  }
+  },
+  "main": "postcss.config.js",
+  "keywords": [],
+  "author": "",
+  "description": ""
 }

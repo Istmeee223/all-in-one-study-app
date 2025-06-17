@@ -450,27 +450,21 @@ function QuickAddTask() {
 
 export default function Tasks() {
   return (
-    <>
+    <div>
       <HeaderBar />
-      <main className="flex-1 overflow-y-auto p-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h3 className="text-2xl font-bold text-foreground">Tasks & Assignments</h3>
-              <p className="text-muted-foreground">Keep track of your academic responsibilities</p>
-            </div>
-            <CreateTaskDialog>
-              <Button className="bg-purple-600 hover:bg-purple-700">
-                <Plus className="w-5 h-5 mr-2" />
-                Add Task
-              </Button>
-            </CreateTaskDialog>
-          </div>
-
-          <QuickAddTask />
-          <TasksList />
+      <div className="max-w-4xl mx-auto py-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-foreground">Your Tasks</h2>
+          <CreateTaskDialog>
+            <Button className="bg-purple-600 hover:bg-purple-700">
+              <Plus className="w-5 h-5 mr-2" />
+              New Task
+            </Button>
+          </CreateTaskDialog>
         </div>
-      </main>
-    </>
+        <QuickAddTask />
+        <TasksList />
+      </div>
+    </div>
   );
 }

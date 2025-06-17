@@ -19,6 +19,8 @@ import Analytics from "@/pages/analytics";
 import Achievements from "@/pages/achievements";
 import AIAssistant from "@/pages/ai-assistant";
 import Chat from "@/pages/chat";
+import { AuthProvider, useAuth } from "./auth";
+import LoginPage from "./pages/login";
 
 function Router() {
   return (
@@ -41,22 +43,35 @@ function Router() {
   );
 }
 
-function App() {
-  return (
-    <ThemeProvider defaultTheme="light">
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <div className="min-h-screen flex bg-slate-50 dark:bg-slate-900">
-            <Sidebar />
-            <div className="flex-1 flex flex-col">
-              <Router />
-            </div>
-          </div>
-          <Toaster />
-        </TooltipProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
-  );
+function ProtectedApp() {
+  const { user } = useAuth();
+  if (!user) return <LoginPage />;
+  return <Router />;
 }
 
-export default App;
+export default function App() {
+  const { isLoggedIn } = useAuth();
+
+  if (!isLoggedIn) {
+    // Show login page or redirect
+    return <Login />;
+  }
+
+  return (
+    <AuthProvider>
+      <ThemeProvider defaultTheme="light">
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <div className="min-h-screen flex bg-slate-50 dark:bg-slate-900">
+              <Sidebar />
+              <div className="flex-1 flex flex-col">
+                <ProtectedApp />
+              </div>
+            </div>
+            <Toaster />
+          </TooltipProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </AuthProvider>
+  );
+}
